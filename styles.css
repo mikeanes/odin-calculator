@@ -3,7 +3,7 @@
     flex-wrap: wrap;
     width: 300px;
 }
-.key{
+.key, .operator{
     width: calc(25% - 10px);
     height: 50px;
     margin: 5px;
