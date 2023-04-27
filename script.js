@@ -26,10 +26,21 @@ function operate(num1, operator, num2){
     }
 };
 
-const seven = document.getElementById('7');
-
 const display = document.getElementById('digits');
 
-function changeDigits(){
-    display.innerHTML = '7';
-}
+const numberButtons = document.querySelectorAll('.key');
+
+let displayValue = 0;
+
+
+numberButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+        if(display.textContent === '0'){
+            display.textContent = '';
+        }
+        display.textContent += button.textContent;
+        displayValue = parseInt(display.textContent);
+        console.log(displayValue);
+    });
+});
+
