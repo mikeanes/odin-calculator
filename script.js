@@ -25,3 +25,11 @@ function operate(num1, operator, num2){
         return divide(num1, num2);
     }
 };
+
+const seven = document.getElementById('7');
+
+const display = document.getElementById('digits');
+
+function changeDigits(){
+    display.innerHTML = '7';
+}
