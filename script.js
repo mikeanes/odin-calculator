@@ -38,6 +38,7 @@ const plus = document.getElementById('+');
 const minus = document.getElementById('-');
 const mult = document.getElementById('*');
 const divi = document.getElementById('/');
+const clear = document.getElementById('clear');
 
 divi.addEventListener('click', () => {
     operator = '/';
@@ -68,20 +69,21 @@ mult.addEventListener('click', () => {
 });
 
 minus.addEventListener('click', () => {
-   operator = '-';
-   inputNewNumber = true;
-   if(secondMinus){
-    currentNumber = parseInt(display.textContent);
-   }else{
-   runningTotal = parseInt(display.textContent);
-   secondMinus = true;
-   }
-   runningTotal = operate(runningTotal, '-', currentNumber);
+    
+    operator = '-';
+    inputNewNumber = true;
+    if(secondMinus){
+        currentNumber = parseInt(display.textContent);
+    }else{
+        runningTotal = parseInt(display.textContent);
+        secondMinus = true;
+    }
+    runningTotal = operate(runningTotal, '-', currentNumber);
    
-   display.textContent = runningTotal;
-   if(hasEqualClicked){
-    hasEqualClicked = false;
-   }
+    display.textContent = runningTotal;
+    if(hasEqualClicked){
+        hasEqualClicked = false;
+    }
 });
 
 
@@ -106,6 +108,10 @@ equals.addEventListener('click', () => {
     }
 });
 
+clear.addEventListener('click', () => {
+    location.reload();
+})
+
 
 const display = document.getElementById('digits');
 
@@ -127,4 +133,5 @@ numberButtons.forEach((button) => {
         
     });
 });
+
 
