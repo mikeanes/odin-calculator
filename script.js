@@ -42,46 +42,43 @@ const divi = document.getElementById('/');
 const clear = document.getElementById('clear');
 
 divi.addEventListener('click', () => {
-    operator = '/';
-    inputNewNumber = true;
-
-    runningTotal = parseInt(display.textContent);
-    if(currentNumber != 0){
-        runningTotal = operate(runningTotal, '*', currentNumber);
-        display.textContent = runningTotal;
+    if(operator == null){
+        operator = '/';
+        runningTotal = parseInt(display.textContent);
+    }else{
+        equal();
+        operator = '/';
     }
+    inputNewNumber = true;
     if(hasEqualClicked){
         hasEqualClicked = false;
     }
 })
 
 mult.addEventListener('click', () => {
-   operator = '*';
-   inputNewNumber = true;
-   
-   runningTotal = parseInt(display.textContent);
-   if(currentNumber != 0){
-        runningTotal = operate(runningTotal, '*', currentNumber);
-        display.textContent = runningTotal;
-   }
-   if(hasEqualClicked){
-    hasEqualClicked = false;
-   }
+    if(operator == null){
+        operator = '*';
+        runningTotal = parseInt(display.textContent);
+    }else{
+        equal();
+        operator = '*';
+    }
+    inputNewNumber = true;
+    if(hasEqualClicked){
+        hasEqualClicked = false;
+    }
 });
 
 minus.addEventListener('click', () => {
-    
-    operator = '-';
-    inputNewNumber = true;
-    if(secondMinus){
-        currentNumber = parseInt(display.textContent);
-    }else{
+    if(operator == null){
+        operator = '-';
         runningTotal = parseInt(display.textContent);
-        secondMinus = true;
+    }else{
+        equal();
+        operator = '-';
     }
-    runningTotal = operate(runningTotal, '-', currentNumber);
-   
-    display.textContent = runningTotal;
+
+    inputNewNumber = true;
     if(hasEqualClicked){
         hasEqualClicked = false;
     }
@@ -92,11 +89,12 @@ plus.addEventListener('click', () => {
     if(operator == null){
         operator = '+';
         runningTotal = parseInt(display.textContent);
-   //currentNumber = parseInt(display.textContent);
+   
     }else{
-    equal();
-
+        equal();
+        operator = '+';
     }
+
    inputNewNumber = true;
    if(hasEqualClicked){
     hasEqualClicked = false;
