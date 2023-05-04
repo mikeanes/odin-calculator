@@ -28,10 +28,11 @@ function operate(num1, operator, num2){
 
 let runningTotal = 0;
 let currentNumber = 0;
-let operator;
+let operator = null;
 let inputNewNumber = false;
 let hasEqualClicked = false;
 let secondMinus = false;
+let longEquation = false;
 
 const equals = document.getElementById('=');
 const plus = document.getElementById('+');
@@ -60,8 +61,8 @@ mult.addEventListener('click', () => {
    
    runningTotal = parseInt(display.textContent);
    if(currentNumber != 0){
-   runningTotal = operate(runningTotal, '*', currentNumber);
-   display.textContent = runningTotal;
+        runningTotal = operate(runningTotal, '*', currentNumber);
+        display.textContent = runningTotal;
    }
    if(hasEqualClicked){
     hasEqualClicked = false;
@@ -88,12 +89,15 @@ minus.addEventListener('click', () => {
 
 
 plus.addEventListener('click', () => {
-   operator = '+';
+    if(operator == null){
+        operator = '+';
+        runningTotal = parseInt(display.textContent);
+   //currentNumber = parseInt(display.textContent);
+    }else{
+    equal();
+
+    }
    inputNewNumber = true;
-   currentNumber = parseInt(display.textContent);
-   runningTotal = operate(runningTotal, '+', currentNumber);
-   
-   display.textContent = runningTotal;
    if(hasEqualClicked){
     hasEqualClicked = false;
    }
@@ -101,12 +105,19 @@ plus.addEventListener('click', () => {
 
 equals.addEventListener('click', () => {
     if(!hasEqualClicked){
+    equal();
+    hasEqualClicked = true;
+    operator = null;
+    }
+   
+});
+
+function equal(){
     currentNumber = parseInt(display.textContent);
     runningTotal = operate(runningTotal, operator, currentNumber);
     display.textContent = runningTotal;
-    hasEqualClicked = true;
-    }
-});
+}
+
 
 clear.addEventListener('click', () => {
     location.reload();
@@ -116,8 +127,6 @@ clear.addEventListener('click', () => {
 const display = document.getElementById('digits');
 
 const numberButtons = document.querySelectorAll('.key');
-
-//let displayValue = 0;
 
 numberButtons.forEach((button) => {
     button.addEventListener('click', () => {
@@ -129,8 +138,6 @@ numberButtons.forEach((button) => {
             display.textContent = '';
         }
         display.textContent += button.textContent;
-        //currentNumber = parseInt(display.textContent);
-        
     });
 });
 
