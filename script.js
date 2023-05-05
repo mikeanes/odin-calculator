@@ -41,49 +41,17 @@ const mult = document.getElementById('*');
 const divi = document.getElementById('/');
 const clear = document.getElementById('clear');
 
-divi.addEventListener('click', () => {
-    if(operator == null){
-        operator = '/';
-        runningTotal = parseInt(display.textContent);
-    }else{
-        equal();
-        operator = '/';
-    }
-    inputNewNumber = true;
-    if(hasEqualClicked){
-        hasEqualClicked = false;
-    }
-})
-
-mult.addEventListener('click', () => {
-    if(operator == null){
-        operator = '*';
-        runningTotal = parseInt(display.textContent);
-    }else{
-        equal();
-        operator = '*';
-    }
-    inputNewNumber = true;
-    if(hasEqualClicked){
-        hasEqualClicked = false;
-    }
+divi.addEventListener('click', (event) => {
+    operatorButtons(event);
 });
 
-minus.addEventListener('click', () => {
-    if(operator == null){
-        operator = '-';
-        runningTotal = parseInt(display.textContent);
-    }else{
-        equal();
-        operator = '-';
-    }
-
-    inputNewNumber = true;
-    if(hasEqualClicked){
-        hasEqualClicked = false;
-    }
+mult.addEventListener('click', (event) => {
+    operatorButtons(event);
 });
 
+minus.addEventListener('click', (event) => {
+    operatorButtons(event);
+});
 
 plus.addEventListener('click', (event) => {
     operatorButtons(event);    
@@ -95,7 +63,10 @@ equals.addEventListener('click', () => {
     hasEqualClicked = true;
     operator = null;
     }
-   
+});
+
+clear.addEventListener('click', () => {
+    location.reload();
 });
 
 function equal(){
@@ -108,7 +79,6 @@ function operatorButtons(event){
     if(operator == null){
         operator = event.target.id;
         runningTotal = parseInt(display.textContent);
-   
     }else{
         equal();
         operator = event.target.id;
@@ -118,14 +88,6 @@ function operatorButtons(event){
         hasEqualClicked = false;
     }
 };
-
-
-clear.addEventListener('click', () => {
-    location.reload();
-})
-
-
-
 
 numberButtons.forEach((button) => {
     button.addEventListener('click', () => {
