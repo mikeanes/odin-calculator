@@ -83,7 +83,12 @@ function equal(){
 };
 
 function updateDisplay(){
-    display.textContent = runningTotal;
+    if(operator == null){
+        display.textContent = currentNumber;
+    }else{
+        display.textContent = runningTotal;
+    }
+    
 };
 
 function operatorButtons(event){
