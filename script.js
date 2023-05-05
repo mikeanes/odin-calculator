@@ -31,9 +31,9 @@ let currentNumber = 0;
 let operator = null;
 let inputNewNumber = false;
 let hasEqualClicked = false;
-let secondMinus = false;
-let longEquation = false;
 
+const display = document.getElementById('digits');
+const numberButtons = document.querySelectorAll('.key');
 const equals = document.getElementById('=');
 const plus = document.getElementById('+');
 const minus = document.getElementById('-');
@@ -85,20 +85,8 @@ minus.addEventListener('click', () => {
 });
 
 
-plus.addEventListener('click', () => {
-    if(operator == null){
-        operator = '+';
-        runningTotal = parseInt(display.textContent);
-   
-    }else{
-        equal();
-        operator = '+';
-    }
-
-   inputNewNumber = true;
-   if(hasEqualClicked){
-    hasEqualClicked = false;
-   }
+plus.addEventListener('click', (event) => {
+    operatorButtons(event);    
 });
 
 equals.addEventListener('click', () => {
@@ -114,7 +102,22 @@ function equal(){
     currentNumber = parseInt(display.textContent);
     runningTotal = operate(runningTotal, operator, currentNumber);
     display.textContent = runningTotal;
-}
+};
+
+function operatorButtons(event){
+    if(operator == null){
+        operator = event.target.id;
+        runningTotal = parseInt(display.textContent);
+   
+    }else{
+        equal();
+        operator = event.target.id;
+    }
+    inputNewNumber = true;
+    if(hasEqualClicked){
+        hasEqualClicked = false;
+    }
+};
 
 
 clear.addEventListener('click', () => {
@@ -122,9 +125,7 @@ clear.addEventListener('click', () => {
 })
 
 
-const display = document.getElementById('digits');
 
-const numberButtons = document.querySelectorAll('.key');
 
 numberButtons.forEach((button) => {
     button.addEventListener('click', () => {
