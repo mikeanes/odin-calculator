@@ -128,9 +128,10 @@ function operatorButtons(event){
         operatorClicked = true;
         runningTotal = parseFloat(display.textContent);
     }else if(operatorClicked){
-        document.getElementById(operator).disabled = false;
-        operator = event.target.id;
         document.getElementById(operator).disabled = true;
+        operator = event.target.id;
+        document.getElementById(operator).disabled = false;
+        operatorClicked = false;
     }
     else{
         equal();
