@@ -26,6 +26,10 @@ function operate(num1, operator, num2){
     }
 };
 
+function round(num){
+    return Math.round(num * 1000)/1000;
+}
+
 let runningTotal = 0;
 let currentNumber = 0;
 let operator = null;
@@ -106,7 +110,7 @@ clear.addEventListener('click', () => {
 function equal(){
     decimal.disabled = false;
     currentNumber = parseFloat(display.textContent);
-    runningTotal = operate(runningTotal, operator, currentNumber);
+    runningTotal = round(operate(runningTotal, operator, currentNumber));
     updateDisplay();
 };
 
