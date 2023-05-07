@@ -32,6 +32,7 @@ let operator = null;
 let inputNewNumber = false;
 let hasEqualClicked = false;
 let hasDecimal = false;
+let operatorClicked = false;
 
 const display = document.getElementById('digits');
 const numberButtons = document.querySelectorAll('.key');
@@ -45,18 +46,34 @@ const clear = document.getElementById('clear');
 
 divi.addEventListener('click', (event) => {
     operatorButtons(event);
+    divi.disabled = true;
+    mult.disabled = false;
+    minus.disabled = false;
+    plus.disabled = false;
 });
 
 mult.addEventListener('click', (event) => {
     operatorButtons(event);
+    mult.disabled = true;
+    divi.disabled = false;
+    minus.disabled = false;
+    plus.disabled = false;
 });
 
 minus.addEventListener('click', (event) => {
     operatorButtons(event);
+    minus.disabled = true;
+    plus.disabled = false;
+    divi.disabled = false;
+    mult.disabled = false;
 });
 
 plus.addEventListener('click', (event) => {
     operatorButtons(event);    
+    plus.disabled = true;
+    minus.disabled = false;
+    divi.disabled = false;
+    mult.disabled = false;
 });
 
 decimal.addEventListener('click', () => {
@@ -64,11 +81,19 @@ decimal.addEventListener('click', () => {
 });
 
 equals.addEventListener('click', () => {
+    if(operatorClicked){
+        return;
+    }
     if(!hasEqualClicked){
     equal();
     hasEqualClicked = true;
     operator = null;
+    operatorClicked = false;
     }
+    plus.disabled = false;
+    minus.disabled = false;
+    divi.disabled = false;
+    mult.disabled = false;
 });
 
 clear.addEventListener('click', () => {
@@ -95,8 +120,14 @@ function operatorButtons(event){
     decimal.disabled = false;
     if(operator == null){
         operator = event.target.id;
+        operatorClicked = true;
         runningTotal = parseFloat(display.textContent);
-    }else{
+    }else if(operatorClicked){
+        document.getElementById(operator).disabled = true;
+        operator = event.target.id;
+        document.getElementById(operator).disabled = false;
+    }
+    else{
         equal();
         operator = event.target.id;
     }
@@ -114,6 +145,13 @@ numberButtons.forEach((button) => {
         }
         if(display.textContent === '0'){
             display.textContent = '';
+        }
+        if(operatorClicked){ // enable all operator buttons when a new number is entered after an operator was clicked
+            document.getElementById('+').disabled = false;
+            document.getElementById('-').disabled = false;
+            document.getElementById('*').disabled = false;
+            document.getElementById('/').disabled = false;
+            operatorClicked = false;
         }
         display.textContent += button.textContent;
     });
