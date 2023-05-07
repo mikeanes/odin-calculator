@@ -48,36 +48,38 @@ const divi = document.getElementById('/');
 const decimal = document.getElementById('.');
 const clear = document.getElementById('clear');
 
-divi.addEventListener('click', (event) => {
-    operatorButtons(event);
-    divi.disabled = true;
+function enableAll(){
+    divi.disabled = false;
     mult.disabled = false;
     minus.disabled = false;
     plus.disabled = false;
+}
+
+divi.addEventListener('click', (event) => {
+    operatorButtons(event);
+    //enableAll();
+    divi.disabled = true;
 });
 
 mult.addEventListener('click', (event) => {
     operatorButtons(event);
+    //enableAll();
     mult.disabled = true;
-    divi.disabled = false;
-    minus.disabled = false;
-    plus.disabled = false;
+    
 });
 
 minus.addEventListener('click', (event) => {
     operatorButtons(event);
+    //enableAll();
     minus.disabled = true;
-    plus.disabled = false;
-    divi.disabled = false;
-    mult.disabled = false;
+    
 });
 
 plus.addEventListener('click', (event) => {
     operatorButtons(event);    
+    //enableAll();
     plus.disabled = true;
-    minus.disabled = false;
-    divi.disabled = false;
-    mult.disabled = false;
+    
 });
 
 decimal.addEventListener('click', () => {
@@ -117,12 +119,14 @@ function equal(){
 function updateDisplay(){
     if(operator == null){
         display.textContent = currentNumber;
-    }else if(operator === '/' || display.textContent === '0'){
+    }else if(operator === '/' && display.textContent === '0'){
         display.textContent = "Bro that's illegal";
         runningTotal = 0;
+        currentNumber = 0;
         return;
-    }
-    else{
+    }else if(isNaN(runningTotal)){
+        display.textContent = 'ERROR';
+    }else{
         display.textContent = runningTotal;
     }
     
@@ -147,6 +151,7 @@ function operatorButtons(event){
     if(hasEqualClicked){
         hasEqualClicked = false;
     }
+    enableAll();
 };
 
 numberButtons.forEach((button) => {
