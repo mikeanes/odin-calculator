@@ -103,6 +103,7 @@ function enableAll(){
     mult.disabled = false;
     minus.disabled = false;
     plus.disabled = false;
+    operatorClicked = true;
 }
 
 function updateDisplay(){
@@ -145,6 +146,7 @@ function operatorButtons(event){
 
 numberButtons.forEach((button) => {
     button.addEventListener('click', () => {
+        //enableAll();
         if(decimalClicked){
             if(operatorClicked){
                 display.textContent = '0.';
