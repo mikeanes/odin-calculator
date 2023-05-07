@@ -108,10 +108,11 @@ function enableAll(){
 function updateDisplay(){
     if(operator == null){
         display.textContent = currentNumber;
-    }else if(operator === '/' && display.textContent === '0'){
+    }else if(operator === '/' && (display.textContent === '0' || display.textContent === '0.')){
         display.textContent = "Bro that's illegal";
         runningTotal = 0;
         currentNumber = 0;
+        decimalClicked = false;
         return;
     }else if(isNaN(runningTotal)){
         display.textContent = 'ERROR';
