@@ -31,7 +31,7 @@ let currentNumber = 0;
 let operator = null;
 let inputNewNumber = false;
 let hasEqualClicked = false;
-let hasDecimal = false;
+let decimalClicked = false;
 let operatorClicked = false;
 
 const display = document.getElementById('digits');
@@ -78,6 +78,7 @@ plus.addEventListener('click', (event) => {
 
 decimal.addEventListener('click', () => {
     decimal.disabled = true;
+    decimalClicked = true;
 });
 
 equals.addEventListener('click', () => {
@@ -94,6 +95,8 @@ equals.addEventListener('click', () => {
     minus.disabled = false;
     divi.disabled = false;
     mult.disabled = false;
+    inputNewNumber = true;
+    
 });
 
 clear.addEventListener('click', () => {
@@ -139,6 +142,16 @@ function operatorButtons(event){
 
 numberButtons.forEach((button) => {
     button.addEventListener('click', () => {
+        if(decimalClicked){
+            if(operatorClicked){
+                display.textContent = '0.';
+                operatorClicked = false;
+                return;
+            }
+            decimalClicked = false;
+            display.textContent += button.textContent;
+            return;
+        }
         if(inputNewNumber){
             display.textContent = '0';
             inputNewNumber = false;
@@ -146,11 +159,11 @@ numberButtons.forEach((button) => {
         if(display.textContent === '0'){
             display.textContent = '';
         }
-        if(operatorClicked){ // enable all operator buttons when a new number is entered after an operator was clicked
-            document.getElementById('+').disabled = false;
-            document.getElementById('-').disabled = false;
-            document.getElementById('*').disabled = false;
-            document.getElementById('/').disabled = false;
+        if(operatorClicked){ 
+            plus.disabled = false;
+            minus.disabled = false;
+            mult.disabled = false;
+            divi.disabled = false;
             operatorClicked = false;
         }
         display.textContent += button.textContent;
