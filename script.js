@@ -56,19 +56,16 @@ divi.addEventListener('click', (event) => {
 mult.addEventListener('click', (event) => {
     operatorButtons(event);
     mult.disabled = true;
-    
 });
 
 minus.addEventListener('click', (event) => {
     operatorButtons(event);
     minus.disabled = true;
-    
 });
 
 plus.addEventListener('click', (event) => {
     operatorButtons(event);    
     plus.disabled = true;
-    
 });
 
 decimal.addEventListener('click', () => {
@@ -81,14 +78,13 @@ equals.addEventListener('click', () => {
         return;
     }
     if(!hasEqualClicked){
-    equal();
-    hasEqualClicked = true;
-    operator = null;
-    operatorClicked = false;
+        equal();
+        hasEqualClicked = true;
+        operator = null;
+        operatorClicked = false;
     }
     enableAll();
     inputNewNumber = true;
-    
 });
 
 clear.addEventListener('click', () => {
@@ -122,7 +118,6 @@ function updateDisplay(){
     }else{
         display.textContent = runningTotal;
     }
-    
 };
 
 function operatorButtons(event){
