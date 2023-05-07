@@ -117,7 +117,12 @@ function equal(){
 function updateDisplay(){
     if(operator == null){
         display.textContent = currentNumber;
-    }else{
+    }else if(operator === '/' || display.textContent === '0'){
+        display.textContent = "Bro that's illegal";
+        runningTotal = 0;
+        return;
+    }
+    else{
         display.textContent = runningTotal;
     }
     
