@@ -48,36 +48,25 @@ const divi = document.getElementById('/');
 const decimal = document.getElementById('.');
 const clear = document.getElementById('clear');
 
-function enableAll(){
-    divi.disabled = false;
-    mult.disabled = false;
-    minus.disabled = false;
-    plus.disabled = false;
-}
-
 divi.addEventListener('click', (event) => {
     operatorButtons(event);
-    //enableAll();
     divi.disabled = true;
 });
 
 mult.addEventListener('click', (event) => {
     operatorButtons(event);
-    //enableAll();
     mult.disabled = true;
     
 });
 
 minus.addEventListener('click', (event) => {
     operatorButtons(event);
-    //enableAll();
     minus.disabled = true;
     
 });
 
 plus.addEventListener('click', (event) => {
     operatorButtons(event);    
-    //enableAll();
     plus.disabled = true;
     
 });
@@ -97,10 +86,7 @@ equals.addEventListener('click', () => {
     operator = null;
     operatorClicked = false;
     }
-    plus.disabled = false;
-    minus.disabled = false;
-    divi.disabled = false;
-    mult.disabled = false;
+    enableAll();
     inputNewNumber = true;
     
 });
@@ -115,6 +101,13 @@ function equal(){
     runningTotal = round(operate(runningTotal, operator, currentNumber));
     updateDisplay();
 };
+
+function enableAll(){
+    divi.disabled = false;
+    mult.disabled = false;
+    minus.disabled = false;
+    plus.disabled = false;
+}
 
 function updateDisplay(){
     if(operator == null){
@@ -174,10 +167,7 @@ numberButtons.forEach((button) => {
             display.textContent = '';
         }
         if(operatorClicked){ 
-            plus.disabled = false;
-            minus.disabled = false;
-            mult.disabled = false;
-            divi.disabled = false;
+            enableAll();
             operatorClicked = false;
         }
         display.textContent += button.textContent;
