@@ -88,7 +88,15 @@ equals.addEventListener('click', () => {
 });
 
 clear.addEventListener('click', () => {
-    location.reload();
+    runningTotal = 0;
+    currentNumber = 0;
+    operator = null;
+    inputNewNumber = false;
+    hasEqualClicked = false;
+    decimalClicked = false;
+    operatorClicked = false;
+    enableAll();
+    updateDisplay();
 });
 
 function equal(){
@@ -155,6 +163,7 @@ numberButtons.forEach((button) => {
             }
             decimalClicked = false;
             display.textContent += button.textContent;
+            inputNewNumber = false;
             return;
         }
         if(inputNewNumber){
@@ -167,6 +176,9 @@ numberButtons.forEach((button) => {
         if(operatorClicked){ 
             enableAll();
             operatorClicked = false;
+        }
+        if(display.textContent.toString().length > 27){
+            return;
         }
         display.textContent += button.textContent;
     });
