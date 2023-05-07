@@ -132,6 +132,7 @@ function operatorButtons(event){
         document.getElementById(operator).disabled = true;
         operator = event.target.id;
         document.getElementById(operator).disabled = false;
+        operatorClicked = false;
     }
     else{
         equal();
