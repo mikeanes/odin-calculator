@@ -96,6 +96,7 @@ clear.addEventListener('click', () => {
     hasEqualClicked = false;
     decimalClicked = false;
     operatorClicked = false;
+    decimal.disabled = false;
     enableAll();
     updateDisplay();
 });
@@ -193,7 +194,7 @@ numberButtons.forEach((button) => {
             enableAll();
             operatorClicked = false;
         }
-        if(display.textContent.toString().length > 27){
+        if(display.textContent.toString().length > 13){
             return;
         }
         display.textContent += button.textContent;
