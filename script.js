@@ -47,6 +47,7 @@ const mult = document.getElementById('*');
 const divi = document.getElementById('/');
 const decimal = document.getElementById('.');
 const clear = document.getElementById('clear');
+const backspace = document.getElementById('backspace');
 
 divi.addEventListener('click', (event) => {
     operatorButtons(event);
@@ -97,6 +98,23 @@ clear.addEventListener('click', () => {
     operatorClicked = false;
     enableAll();
     updateDisplay();
+});
+
+backspace.addEventListener('click', () => {
+    if(display.textContent === '0' || hasEqualClicked || operatorClicked){
+        return;
+    }else{
+    let displayText = display.textContent;
+    displayText = displayText.slice(0, -1);
+    display.textContent = displayText;
+    if(display.textContent === ''){
+        display.textContent = 0;
+    }
+    if (displayText.slice(-1) !== '.') {
+        decimal.disabled = false; // enable the decimal button
+        decimalClicked = false; // reset the decimalClicked flag
+    }
+    }
 });
 
 function equal(){
@@ -154,12 +172,10 @@ function operatorButtons(event){
 
 numberButtons.forEach((button) => {
     button.addEventListener('click', () => {
-        //enableAll();
         if(decimalClicked){
-            if(operatorClicked){
-                display.textContent = '0.';
+            if(operatorClicked || (display.textContent === '0' && operatorClicked)){
+                display.textContent = '0';
                 operatorClicked = false;
-                return;
             }
             decimalClicked = false;
             display.textContent += button.textContent;
