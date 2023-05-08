@@ -122,6 +122,10 @@ function equal(){
     decimal.disabled = false;
     currentNumber = parseFloat(display.textContent);
     runningTotal = round(operate(runningTotal, operator, currentNumber));
+    
+    if(runningTotal.toString().length > 13){
+        runningTotal = runningTotal.toExponential(8);
+    }
     updateDisplay();
 };
 
